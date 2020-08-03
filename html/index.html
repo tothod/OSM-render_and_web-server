@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo map</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" /><![endif]-->
+	<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+	<style type="text/css" media="screen">
+		html,body	
+			{
+				margin: 0px;
+				padding: 0px;
+				width: 100%;
+				height: 100%;
+			}
+	</style>
+</head>
+
+<body>
+	<div id="map" role="main" style="width: 100%; height:100%"></div>
+
+	<script type="text/javascript" charset="utf-8">
+
+	var startposition = new L.LatLng(57.68, 12.1);
+
+	var mapnik = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		subdomains: "abc",
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		maxZoom: 18
+	});
+	var karta = new L.tileLayer('karta/{z}/{x}/{y}.png', {
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		maxZoom: 18
+	});
+
+	
+	var layerControl = new L.Control.Layers({
+		"OpenStreetMap": mapnik,
+		"Enkel karta": karta
+	},{
+	},{
+		
+		collapsed: true
+	});
+	var map = new L.Map('map', {
+		center: startposition,
+		zoom: 16,
+		layers: [
+			karta  
+		]
+	});
+	map.addControl(layerControl);
+
+	</script>
+</body>
+</html>
