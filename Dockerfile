@@ -29,6 +29,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
   && apt-get install -y -q wget \
   && apt-get install -y -q runit \
   && apt-get install -y -q sudo \
+  && apt-get install -y -q php \
+  && apt-get install -y -q libapache2-mod-php \
+  && apt-get install -y -q php-mysql \
+  && apt-get install -y -q php7.4-pgsql \
+  && apt-get install -y -q php-cli \  
   && git clone -b switch2osm git://github.com/SomeoneElseOSM/mod_tile.git
 
 # Install mod tile 
@@ -69,6 +74,8 @@ COPY ./html/index.html /defaultfiles/html/index.html
 COPY ./renderd/renderd.conf /defaultfiles/etc/renderd.conf
 COPY ./stylesheets /defaultfiles/stylesheets
 
+# Config php
+COPY ./php-config/dir.conf /etc/apache2/mods-enabled
 
 # Copy run script
 COPY ./run.sh /run.sh  

@@ -27,7 +27,9 @@ service apache2 start
 echo " "
 echo "================ Starting renderd ======================"
 echo " "
-renderd -f -c /usr/local/etc/renderd.conf
+renderd -f -c /usr/local/etc/renderd.conf  &
+child=$!
+wait "$child"
 echo " "
 echo "====== You should not see this something has gone wrong   =========="
 echo " "
